@@ -36,21 +36,21 @@ for ((i = 1; i <= cantidad_llaves; i++)); do
     done
 
     # Generar la clave SSH usando el algoritmo ed25519
-    ssh-keygen -t ed25519 -C "$email" -f "/root/.ssh/${host}_ed25519"
+    ssh-keygen -t ed25519 -C "$email" -f "/home/${USER}/.ssh/${host}_ed25519"
 
     # Agregar configuración al archivo de configuración SSH
-    echo -e "\nHost $host\n\tHostname $repositorio\n\tIdentityFile /root/.ssh/${host}_ed25519" >> "/root/.ssh/config"
+    echo -e "\nHost $host\n\tHostname $repositorio\n\tIdentityFile /home/${USER}/.ssh/${host}_ed25519" >> "/home/${USER}/.ssh/config"
 
     # Iniciar el agente SSH
     eval "$(ssh-agent -s)"
 
     # Añadir la llave al agente SSH
-    ssh-add "/root/.ssh/${host}_ed25519"
+    ssh-add "/home/${USER}/.ssh/${host}_ed25519"
 
     echo "Llave generada para $email en $host"
     echo "A continuación, copia y pega la llave pública:"
     echo ""
-    cat "/root/.ssh/${host}_ed25519.pub"
+    cat "/home/${USER}/.ssh/${host}_ed25519.pub"
     echo ""
 done
 

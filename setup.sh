@@ -22,6 +22,8 @@ if [ "$install_docker" == "y" ]; then
     apt-get update
 
     apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+    groupadd docker
+    usermod -aG docker $USER
 else
     echo "Skipping Docker installation."
 fi
